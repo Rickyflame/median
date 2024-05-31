@@ -6,14 +6,14 @@ const prisma = new PrismaClient();
 async function main() {
   // create two dummy articles
   const post1 = await prisma.article.upsert({
-    where: { title: 'Prisma Add Support for MongoDB' },
+    where: { title: 'Prisma Adds Support For MongoDB' },
     update: {},
     create: {
       title: 'Prisma Adds Support For MongoDB',
       body: 'Support for MongoDB has one of the most requested features since the initial release of ...',
       description:
         "We are excited to share today's Prisma ORM release add stable support for MongoDB!",
-      published: false,
+      published: true,
     },
   });
   const post2 = await prisma.article.upsert({
@@ -24,7 +24,7 @@ async function main() {
       body: "Our engineer's have been worling really hoard to give you the best top shelf....",
       description:
         'we dont even know what is in this update we are releasing. Sisi tuko hapa kuwaongelesha kidogo and then we will be paid ',
-      published: false,
+      published: true,
     },
   });
 
