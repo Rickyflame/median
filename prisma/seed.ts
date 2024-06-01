@@ -4,10 +4,33 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  // create tqo dummy users
+  const user1 = await prisma.user.upsert({
+    where: { email: 'testingdummy@gmail.com' },
+    update: {},
+    create: {
+      email: 'testingdummy@gmail.com',
+      name: 'testing dummy wan',
+      password: 'TEST123456789',
+    },
+  });
+
+  const user2 = await prisma.user.upsert({
+    where: { email: 'dummynumber2@gmail.com' },
+    update: {},
+    create: {
+      email: 'dummynumber2@gmail.com',
+      name: 'kijana dwanzi',
+      password: 'Dwanzi123',
+    },
+  });
+
   // create two dummy articles
   const post1 = await prisma.article.upsert({
     where: { title: 'Prisma Adds Support For MongoDB' },
-    update: {},
+    update: {
+      authorId: user2.id,
+    },
     create: {
       title: 'Prisma Adds Support For MongoDB',
       body: 'Support for MongoDB has one of the most requested features since the initial release of ...',
@@ -18,7 +41,9 @@ async function main() {
   });
   const post2 = await prisma.article.upsert({
     where: { title: "What's new in prisma update 1.9.9.9" },
-    update: {},
+    update: {
+      authorId: user1.id,
+    },
     create: {
       title: "What's new in prisma update 1.9.9.9",
       body: "Our engineer's have been worling really hoard to give you the best top shelf....",
@@ -30,7 +55,9 @@ async function main() {
 
   const post3 = await prisma.article.upsert({
     where: { title: 'This crap is too expeinsive and you should not buy it' },
-    update: {},
+    update: {
+      authorId: user2.id,
+    },
     create: {
       title: 'This crap is too expensive and you should not buy it',
       body: 'In todays recap on crap with a price tag, we look at the Ipone 69 pro slut max',
@@ -40,7 +67,35 @@ async function main() {
     },
   });
 
-  console.log({ post1, post2, post3 });
+  const post4 = await prisma.article.upsert({
+    where: { title: 'We are the new adult so its time we act like it' },
+    update: {
+      authorId: user1.id,
+    },
+    create: {
+      title: 'We are the new adult so its time we act like it',
+      body: 'In todays recap on we are the new adult w e take a look at the onlyfans mothers',
+      description:
+        'We are living in a worls where mothers are no longer what they used to be 30 yyears ago. The nurture is no longer there',
+      published: false,
+    },
+  });
+
+  const post5 = await prisma.article.upsert({
+    where: { title: 'The government will not reduce the taxes anymore' },
+    update: {
+      authorId: user1.id,
+    },
+    create: {
+      title: 'The government will not reduce the taxes anymore',
+      body: 'In todays recap on the government want to F us over we look at the proposed finance bill by zakayo',
+      description:
+        'with just 30 days to the begining of the 24/25 fiscal years,Zakayo has decided that we will increase the taxes and kill the middle class ',
+      published: true,
+    },
+  });
+
+  console.log({ post1, post2, post3, post4, post5 });
 }
 
 // execute the main function
