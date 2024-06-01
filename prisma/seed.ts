@@ -27,12 +27,12 @@ async function main() {
 
   // create two dummy articles
   const post1 = await prisma.article.upsert({
-    where: { title: 'Prisma Adds Support For MongoDB' },
+    where: { title: 'Prisma Adds Support a For MongoDB' },
     update: {
       authorId: user2.id,
     },
     create: {
-      title: 'Prisma Adds Support For MongoDB',
+      title: 'Prisma Adds Support a For MongoDB',
       body: 'Support for MongoDB has one of the most requested features since the initial release of ...',
       description:
         "We are excited to share today's Prisma ORM release add stable support for MongoDB!",
@@ -40,12 +40,12 @@ async function main() {
     },
   });
   const post2 = await prisma.article.upsert({
-    where: { title: "What's new in prisma update 1.9.9.9" },
+    where: { title: "What's new in prisma update 4.92.9.9" },
     update: {
       authorId: user1.id,
     },
     create: {
-      title: "What's new in prisma update 1.9.9.9",
+      title: "What's new in prisma update 4.92.9.9",
       body: "Our engineer's have been worling really hoard to give you the best top shelf....",
       description:
         'we dont even know what is in this update we are releasing. Sisi tuko hapa kuwaongelesha kidogo and then we will be paid ',
@@ -54,12 +54,14 @@ async function main() {
   });
 
   const post3 = await prisma.article.upsert({
-    where: { title: 'This crap is too expeinsive and you should not buy it' },
+    where: {
+      title: 'This crap is too expensive and you should not buy it part 1',
+    },
     update: {
       authorId: user2.id,
     },
     create: {
-      title: 'This crap is too expensive and you should not buy it',
+      title: 'This crap is too expensive and you should not buy it part 1',
       body: 'In todays recap on crap with a price tag, we look at the Ipone 69 pro slut max',
       description:
         ' The Ipone 69 pro slut max is a top tier sluttfying gadget to carry around and you should not buy it. With its gorgeous 63 inch screen, it has the best display to see all your falilures in 32K resolution',
@@ -83,9 +85,7 @@ async function main() {
 
   const post5 = await prisma.article.upsert({
     where: { title: 'The government will not reduce the taxes anymore' },
-    update: {
-      authorId: user1.id,
-    },
+    update: {},
     create: {
       title: 'The government will not reduce the taxes anymore',
       body: 'In todays recap on the government want to F us over we look at the proposed finance bill by zakayo',
