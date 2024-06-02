@@ -1,27 +1,37 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 //initialize prisma client
 const prisma = new PrismaClient();
 
+const roundsOfHashing = 10;
+
 async function main() {
   // create tqo dummy users
+
+  const passwordSabin = await bcrypt.hash('password-sabin', roundsOfHashing);
+  const PasswordAlex = await bcrypt.hash('passowrd-alex', roundsOfHashing);
   const user1 = await prisma.user.upsert({
-    where: { email: 'testingdummy@gmail.com' },
-    update: {},
+    where: { email: 'sabin@adams.com' },
+    update: {
+      password: passwordSabin,
+    },
     create: {
-      email: 'testingdummy@gmail.com',
-      name: 'testing dummy wan',
-      password: 'TEST123456789',
+      email: 'sabin@adams.com',
+      name: 'melony ndungu', // manzi yako apo kwa API
+      password: 'passwordSabin',
     },
   });
 
   const user2 = await prisma.user.upsert({
-    where: { email: 'dummynumber2@gmail.com' },
-    update: {},
+    where: { email: 'alex@ruheni.com' },
+    update: {
+      password: PasswordAlex,
+    },
     create: {
-      email: 'dummynumber2@gmail.com',
+      email: 'alex@ruheni.com',
       name: 'kijana dwanzi',
-      password: 'Dwanzi123',
+      password: 'PasswordAlex',
     },
   });
 
